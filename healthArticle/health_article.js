@@ -50,3 +50,39 @@ xhr.onload = function() {
 }
 
 xhr.send();
+
+var xhr2 = new XMLHttpRequest();
+var url2 = './news_article.json';
+
+xhr2.open('GET', url2, true);
+xhr2.responseType = 'json';
+
+xhr2.onload = function() {
+    var newsArticles = xhr2.response
+    var articlesDiv = document.getElementById('articles');
+
+    newsArticles.forEach(function(article) {
+        var newsDiv = document.createElement('div');
+        newsDiv.classList.add('newsarticle');
+
+        var newsTitle = document.createElement('h2');
+        newsTitle.textContent = article.title;
+        
+        var newsAuthor = document.createElement('h3');
+        newsAuthor.textContent = article.author;
+
+        var newsDate = document.createElement('p');
+        newsDate.textContent = article.date;
+
+        var newsContent = document.createElement('p');
+        newsContent.textContent = article.content;
+
+        newsDiv.appendChild(newsTitle);
+        newsDiv.appendChild(newsAuthor);
+        newsDiv.appendChild(newsDate);
+        newsDiv.appendChild(newsContent);
+        articlesDiv.appendChild(newsDiv);
+    });
+}
+
+xhr2.send();
